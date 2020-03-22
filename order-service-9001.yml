@@ -1,0 +1,38 @@
+spring: 
+  profiles:
+    active: 
+    - dev
+---
+spring:
+  profiles:
+    active: dev #开发环境
+  application:
+    name: order-service-9001  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+
+server:
+  port: 9001
+
+eureka:
+  instance:
+    instance-id: order-service-9001 # 自定义服务名称信息
+    hostname: localhost
+    prefer-ip-address: true # 访问路径可以显示ip信息
+  client:
+    registerWithEureka: false # 实例是否在eureka服务器上注册自己的信息以供其他服务发现（默认为true）
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://127.0.0.1:7002/eureka/ #往该地址注册自己的信息到注册中心
+
+info:
+  app.name: order-service-9001
+  company.name: www.bdqn.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+feign:
+  hystrix:
+    enabled: true
