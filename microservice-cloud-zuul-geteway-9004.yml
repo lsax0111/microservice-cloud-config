@@ -28,8 +28,16 @@ info:
   build.artifactId: $project.artifactId$ # 不显示，后面再去解决它
   build.version: $project.version$ # 不显示，后面再去解决它
 
+
+ribbon:  
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+
 #zuul配置
 zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
   routes:
     java32.path: /java32/**
     java32.serviceId: product-service
