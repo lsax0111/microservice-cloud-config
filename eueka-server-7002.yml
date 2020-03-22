@@ -47,6 +47,6 @@ eureka:
       # 与Eureka注册服务中心的通信zone和url地址,用于查询服务和注册服务
       defaultZone: http://127.0.0.1:7001/eureka/
 spring:
-   profiles: test     #测试环境
+  profiles: test     #测试环境
   application:
     name: eureka-server-7002  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
