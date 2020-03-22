@@ -1,0 +1,35 @@
+spring: 
+  profiles:
+    active: 
+    - dev
+    
+---
+server:
+  port: 9004
+
+spring:
+  application:
+    name: microservice-cloud-zuul-geteway-9004
+
+# eureka配置
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    instance-id: microservice-cloud-zuul-geteway-9004 # 自定义服务名称信息
+    prefer-ip-address: true # 访问路径可以显示ip信息
+
+info:
+  app.name: microservice-cloud30
+  company.name: www.bdqn.cn
+  build.artifactId: $project.artifactId$ # 不显示，后面再去解决它
+  build.version: $project.version$ # 不显示，后面再去解决它
+
+#zuul配置
+zuul:
+  routes:
+    java32.path: /java32/**
+    java32.serviceId: product-service
+  ignored-services: '*'
+  prefix: /api
