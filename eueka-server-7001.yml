@@ -1,0 +1,46 @@
+spring: 
+  profiles:
+    active: 
+    - dev
+
+---
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: localhost  # Eureka服务端实例名
+  server:
+    enable-self-preservation: true #开启自我保护机制
+  client:
+    registerWithEureka: false  # 实例是否在eureka服务器上注册自己的信息以供其他服务发现（默认为true）
+    fetchRegistry: false  # 此客户端是否获取eureka服务器注册表上的注册信息（默认为true,）
+    serviceUrl:
+      # 与Eureka注册服务中心的通信zone和url地址,用于查询服务和注册服务
+      defaultZone: http://127.0.0.1:7002/eureka/
+
+spring:
+  profiles: dev     #开发环境
+  application:
+    name: eureka-server-7001
+
+--- 
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: localhost  # Eureka服务端实例名
+  server:
+    enable-self-preservation: true #开启自我保护机制
+  client:
+    registerWithEureka: false  # 实例是否在eureka服务器上注册自己的信息以供其他服务发现（默认为true）
+    fetchRegistry: false  # 此客户端是否获取eureka服务器注册表上的注册信息（默认为true,）
+    serviceUrl:
+      # 与Eureka注册服务中心的通信zone和url地址,用于查询服务和注册服务
+      defaultZone: http://127.0.0.1:7002/eureka/
+
+spring:
+  profiles: test     #测试环境
+  application:
+    name: eureka-server-7001   
