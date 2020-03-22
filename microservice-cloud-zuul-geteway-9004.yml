@@ -8,6 +8,8 @@ server:
   port: 9004
 
 spring:
+  profiles:
+    active: dev #开发环境
   application:
     name: microservice-cloud-zuul-geteway-9004
 
