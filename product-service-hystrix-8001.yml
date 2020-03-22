@@ -1,0 +1,110 @@
+spring: 
+  profiles:
+    active: 
+    - dev
+
+---
+spring:
+  application:
+    name: product-service  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+    mode: HTML5
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url:  jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+      username: root
+      password: root
+
+server:
+  port: 8001
+
+eureka:
+  instance:
+    instance-id: product-service-8001 # 自定义服务名称信息
+    hostname: localhost
+    prefer-ip-address: true # 访问路径可以显示ip信息
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://127.0.0.1:7002/eureka/ #往该地址注册自己的信息到注册中心
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    cn.bdqn.thinkifu.mapper: debug  # 解决mybatis sql不打印问题
+mybatis:
+  # mybatis主配置文件
+  # config-location: classpath:mybatis/mybatis-config.xml
+  # 映射文件所在路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  # pojo类所在包路径。
+  type-aliases-package: cn.bdqn.thinkifu.entity
+
+info:
+  app.name: product-service-8001
+  company.name: www.bdqn.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+#hystrix配置
+instance-id: product-service-8001-hystrix # 自定义服务名称信息
+
+---
+spring:
+  application:
+    name: product-service  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
+  profiles:
+    active: test
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+    mode: HTML5
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url:  jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+      username: root
+      password: root
+
+server:
+  port: 8001
+
+eureka:
+  instance:
+    instance-id: product-service-8001 # 自定义服务名称信息
+    hostname: localhost
+    prefer-ip-address: true # 访问路径可以显示ip信息
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/,http://127.0.0.1:7002/eureka/ #往该地址注册自己的信息到注册中心
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    cn.bdqn.thinkifu.mapper: debug  # 解决mybatis sql不打印问题
+mybatis:
+  # mybatis主配置文件
+  # config-location: classpath:mybatis/mybatis-config.xml
+  # 映射文件所在路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  # pojo类所在包路径。
+  type-aliases-package: cn.bdqn.thinkifu.entity
+
+info:
+  app.name: product-service-8001
+  company.name: www.bdqn.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+#hystrix配置
+instance-id: product-service-8001-hystrix # 自定义服务名称信息
