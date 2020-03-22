@@ -1,0 +1,52 @@
+spring: 
+  profiles:
+    active: 
+    - dev
+
+---
+server:
+  port: 7002
+
+eureka:
+  server:
+    enable-self-preservation: false
+  instance:
+    hostname: localhost  # Eureka服务端实例名
+    instance-id: eureka-server-7002 # 自定义服务名称信息
+    prefer-ip-address: true # 访问路径可以显示ip信息
+    lease-renewal-interval-in-seconds: 5 #向注册中心注册服务id的间隔
+    lease-expiration-duration-in-seconds: 10 #续约到期时间
+  client:
+    #registerWithEureka: false  # 实例是否在eureka服务器上注册自己的信息以供其他服务发现（默认为true）
+    #fetchRegistry: false  # 此客户端是否获取eureka服务器注册表上的注册信息（默认为true,）
+    serviceUrl:
+      # 与Eureka注册服务中心的通信zone和url地址,用于查询服务和注册服务
+      defaultZone: http://127.0.0.1:7001/eureka/
+spring:
+  profiles: dev     #开发环境
+  application:
+    name: eureka-server-7002  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
+
+--- 
+server:
+  port: 7002
+
+eureka:
+  server:
+    enable-self-preservation: false
+  instance:
+    hostname: localhost  # Eureka服务端实例名
+    instance-id: eureka-server-7002 # 自定义服务名称信息
+    prefer-ip-address: true # 访问路径可以显示ip信息
+    lease-renewal-interval-in-seconds: 5 #向注册中心注册服务id的间隔
+    lease-expiration-duration-in-seconds: 10 #续约到期时间
+  client:
+    #registerWithEureka: false  # 实例是否在eureka服务器上注册自己的信息以供其他服务发现（默认为true）
+    #fetchRegistry: false  # 此客户端是否获取eureka服务器注册表上的注册信息（默认为true,）
+    serviceUrl:
+      # 与Eureka注册服务中心的通信zone和url地址,用于查询服务和注册服务
+      defaultZone: http://127.0.0.1:7001/eureka/
+spring:
+   profiles: test     #测试环境
+  application:
+    name: eureka-server-7002  # 指明微服务应用名，这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name。
